@@ -4,5 +4,6 @@ public enum Position {
     DOCTOR,
     SUPPORT_STAFF,
     NURSE,
-    PHARMACIST
+    PHARMACIST,
+    ACCOUNTANT
 }
