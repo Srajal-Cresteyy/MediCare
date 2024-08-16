@@ -10,10 +10,13 @@ import {
   Button,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const isMenuOpen = Boolean(anchorEl)
+
+  const [activeNav, setActiveNav] = useState('#')
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget)
@@ -25,11 +28,10 @@ const Navbar = () => {
 
   return (
     <AppBar
-      position="static"
-      elevation={24}
+      position="fixed"
+      elevation={-1}
       sx={{
-        background: 'linear-gradient(to right, #2196F3, #21CBF3)', // Gradient background
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Subtle shadow for a modern look
+        background: 'linear-gradient(to right, #2196F3, #21CBF3)',
       }}
     >
       <Toolbar
@@ -39,9 +41,9 @@ const Navbar = () => {
             sm: 5,
             md: 30,
           },
-          my: 3,
+          my: 1,
           display: 'flex',
-          justifyContent: 'space-between', // Space out items
+          justifyContent: 'space-between',
         }}
       >
         <Typography
@@ -58,12 +60,12 @@ const Navbar = () => {
         <Box
           sx={{
             display: {
-              xs: 'none', // Hide for xs (extra-small) viewports
-              md: 'flex', // Show as flex for md (medium) viewports and up
+              xs: 'none',
+              md: 'flex',
             },
             gap: 2,
-            flexGrow: 1, // Pushes the content to the right
-            justifyContent: 'flex-end', // Align content to the right
+            flexGrow: 1,
+            justifyContent: 'flex-end',
           }}
         >
           <Button
@@ -71,57 +73,75 @@ const Navbar = () => {
               color: 'white',
               textTransform: 'none',
               fontWeight: 'thin',
-              borderRadius: 2, // Rounded corners for buttons
+              borderRadius: 2,
               '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.2)', // Subtle hover effect
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
               },
             }}
           >
-            Home
+            <a
+              href="/#"
+              onClick={() => setActiveNav('#')}
+              className={activeNav === '/#' ? 'active' : ''}
+            >
+              Home
+            </a>
           </Button>
           <Button
             sx={{
               color: 'white',
               textTransform: 'none',
               fontWeight: 'thin',
-              borderRadius: 2, // Rounded corners for buttons
+              borderRadius: 2,
               '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.2)', // Subtle hover effect
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
               },
             }}
           >
-            Services
+            <a
+              href="/#About"
+              onClick={() => setActiveNav('#About')}
+              className={activeNav === '/#About' ? 'active' : ''}
+            >
+              About
+            </a>
           </Button>
           <Button
             sx={{
               color: 'white',
               textTransform: 'none',
               fontWeight: 'thin',
-              borderRadius: 2, // Rounded corners for buttons
+              borderRadius: 2,
               '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.2)', // Subtle hover effect
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
               },
             }}
           >
-            Career
+            <a
+              href="/#Services"
+              onClick={() => setActiveNav('#Services')}
+              className={activeNav === '/#Services' ? 'active' : ''}
+            >
+              Services
+            </a>
           </Button>
           <Button
             sx={{
               color: 'white',
               textTransform: 'none',
               fontWeight: 'thin',
-              borderRadius: 2, // Rounded corners for buttons
-              border: '1px solid white', // Outlined border
+              borderRadius: 2,
+              border: '1px solid white',
               '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.2)', // Subtle hover effect
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
               },
             }}
           >
-            Login/Signup
+            <Link to={'/LoginSignUp'}>Login/Signup</Link>
           </Button>
         </Box>
         <IconButton
-          edge="end" // Move the icon to the end of the toolbar
+          edge="end"
           color="inherit"
           aria-label="menu"
           onClick={handleMenuOpen}
@@ -133,11 +153,11 @@ const Navbar = () => {
           anchorEl={anchorEl}
           open={isMenuOpen}
           onClose={handleMenuClose}
-          sx={{ display: { xs: 'block', md: 'none' }, borderRadius: 2 }} // Rounded corners for Menu
+          sx={{ display: { xs: 'block', md: 'none' }, borderRadius: 2 }}
         >
-          <MenuItem onClick={handleMenuClose}>Home</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Services</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Career</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Home </MenuItem>
+          <MenuItem onClick={handleMenuClose}>About </MenuItem>
+          <MenuItem onClick={handleMenuClose}>Services </MenuItem>
           <MenuItem onClick={handleMenuClose}>Login/Signup</MenuItem>
         </Menu>
       </Toolbar>

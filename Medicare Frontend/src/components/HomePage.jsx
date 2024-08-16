@@ -12,15 +12,16 @@ const typoStyles = {
 const HomePage = () => {
   return (
     <Box
+      id=""
       sx={{
         display: 'flex',
         flexDirection: 'column', // Stack items vertically
         justifyContent: 'center', // Center horizontally
         alignItems: 'center', // Center vertically
         height: {
-          xs: '100vh',
-          sm: '100vh',
-          md: '84.5vh',
+          xs: '120vh',
+          sm: '120vh',
+          md: '100vh',
         }, // Full viewport height
         background: 'linear-gradient(to right, #2196F3, #21CBF3)', // Same gradient background as the Navbar
         textAlign: 'center', // Center text

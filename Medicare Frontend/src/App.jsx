@@ -7,12 +7,14 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
-import HomePage from './components/HomePage'
+import LandingPage from './pages/LandingPage'
+import LoginSignUpPage from './pages/LoginSignUpPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<MainLayout />}>
-      <Route index element={<HomePage />} />
+      <Route index element={<LandingPage />} />
+      <Route path="/LoginSignUp" element={<LoginSignUpPage />} />
     </Route>
   )
 )
