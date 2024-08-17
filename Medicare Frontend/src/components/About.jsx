@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 import Lottie from 'lottie-react'
-import aboutAnimation from '../assets/About-Animation.json'
+import aboutAnimation from '../assets/About-Animation-Three.json'
 
 // Styles for typography
 const typoStyles = {

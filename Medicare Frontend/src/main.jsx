@@ -12,6 +12,9 @@ const theme = createTheme({
       main: '#3055eb',
     },
   },
+  typography: {
+    fontFamily: 'Poppins, sans-serif',
+  },
 })
 
 createRoot(document.getElementById('root')).render(

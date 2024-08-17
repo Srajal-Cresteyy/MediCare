@@ -31,18 +31,18 @@ const Footer = () => {
         MediCare - Your Health, Our Priority
       </Typography>
       <Box sx={{ display: 'flex', gap: 2, marginBottom: 2 }}>
-        <Link href="/" color="inherit" underline="hover">
+        <a href="/" color="inherit" underline="hover">
           Home
-        </Link>
-        <Link href="/about" color="inherit" underline="hover">
+        </a>
+        <a href="/#About" color="inherit" underline="hover">
           About
-        </Link>
-        <Link href="/services" color="inherit" underline="hover">
+        </a>
+        <a href="/#Services" color="inherit" underline="hover">
           Services
-        </Link>
-        <Link href="/login" color="inherit" underline="hover">
+        </a>
+        <a href="/LoginSignUp" color="inherit" underline="hover">
           Login
-        </Link>
+        </a>
       </Box>
       <Box sx={{ display: 'flex', gap: 1 }}>
         <IconButton color="inherit" href="https://facebook.com" target="_blank">

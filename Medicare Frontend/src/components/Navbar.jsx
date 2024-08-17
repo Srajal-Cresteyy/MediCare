@@ -155,10 +155,18 @@ const Navbar = () => {
           onClose={handleMenuClose}
           sx={{ display: { xs: 'block', md: 'none' }, borderRadius: 2 }}
         >
-          <MenuItem onClick={handleMenuClose}>Home </MenuItem>
-          <MenuItem onClick={handleMenuClose}>About </MenuItem>
-          <MenuItem onClick={handleMenuClose}>Services </MenuItem>
-          <MenuItem onClick={handleMenuClose}>Login/Signup</MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+            <a href="/#Home">Home</a>{' '}
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+            <a href="/#About">About</a>{' '}
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+            <a href="/#Services">Services</a>{' '}
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>
+            <a href="/LoginSignUp">Login/Signup</a>
+          </MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>

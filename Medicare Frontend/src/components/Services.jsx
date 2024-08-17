@@ -29,6 +29,7 @@ const Services = () => {
     <div
       id="Services"
       className="flex flex-col items-center bg-gradient-to-r from-blue-400 to-blue-300 min-h-8 pt-20 pb-24"
+      style={{ background: 'linear-gradient(to right, #2196F3, #21CBF3)' }}
     >
       <h1 className="text-4xl font-bold text-white mb-10">Our Services</h1>
       <div className="flex flex-col md:flex-row justify-center items-center gap-8 max-w-7xl mx-auto px-5">

@@ -12,7 +12,7 @@ const typoStyles = {
 const HomePage = () => {
   return (
     <Box
-      id=""
+      id="Home"
       sx={{
         display: 'flex',
         flexDirection: 'column', // Stack items vertically
