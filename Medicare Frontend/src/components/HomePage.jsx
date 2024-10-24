@@ -39,7 +39,7 @@ const HomePage = () => {
       }}
     >
       <Typography variant="h1" sx={{ ...typoStyles, animationDelay: '0s' }}>
-        Medi-Care
+        MediCare
       </Typography>
       <Typography
         variant="body1"
@@ -48,13 +48,14 @@ const HomePage = () => {
           marginTop: -1,
           animationDelay: '0.5s',
           fontWeight: 'thin',
+          // fontSize: '15px',
           display: {
             xs: 'none',
             md: 'block',
           },
         }}
       >
-        A system to make Medical Records easier
+        A SYSTEM TO MAKE MEDICAL RECORDS EASIER
       </Typography>
     </Box>
   )

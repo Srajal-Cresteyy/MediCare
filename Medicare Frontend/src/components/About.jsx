@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { Box, Typography, Button } from '@mui/material'
 import Lottie from 'lottie-react'
 import aboutAnimation from '../assets/About-Animation-Three.json'
 
@@ -34,12 +34,20 @@ const textContainerStyles = {
   justifyContent: 'center',
   alignItems: 'flex-start',
   padding: 3,
-  maxWidth: '600px',
+  maxWidth: '700px',
   marginLeft: 'auto',
   marginRight: 'auto',
 }
 
 const About = () => {
+  // State to toggle between short and full text
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  // Handle the toggle
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded)
+  }
+
   return (
     <Box
       id="About"
@@ -72,7 +80,7 @@ const About = () => {
           position: 'absolute',
           top: '-10%',
           left: '-20%',
-          width: '200%',
+          width: '220%',
           height: '200%',
           background:
             'radial-gradient(circle at center, rgba(33,150,243,0.3), transparent)',
@@ -86,7 +94,7 @@ const About = () => {
         <Box />
         <Lottie
           animationData={aboutAnimation}
-          style={{ width: '50%', height: 'auto', marginTop: '30px' }}
+          style={{ width: '49%', height: 'auto', marginTop: '30px' }}
         />
       </Box>
 
@@ -99,7 +107,7 @@ const About = () => {
           About Us
         </Typography>
         <Typography
-          variant="h5"
+          variant="h6"
           sx={{
             ...typoStyles,
             animationDelay: '0.5s',
@@ -108,10 +116,30 @@ const About = () => {
           }}
         >
           MediCare is dedicated to simplifying medical record management. Our
-          platform is designed to streamline and enhance the accessibility of
-          patient information, ensuring a seamless experience for healthcare
-          providers and patients alike.
+          platform is designed to streamline and enhance the accessibility
+          {isExpanded && (
+            <>
+              {' '}
+              of patient information, ensuring a seamless experience for
+              healthcare providers and patients.
+            </>
+          )}
         </Typography>
+        <Button
+          onClick={toggleReadMore}
+          sx={{
+            color: '#2196F3',
+            marginTop: '16px',
+            // background: '#2196F3',
+            border: '0.5px solid #2196F3',
+            '&:hover': {
+              color: 'white',
+              backgroundColor: '#1976D2', // Darker shade of #2196F3
+            },
+          }}
+        >
+          {isExpanded ? 'Read Less' : 'Read More'}
+        </Button>
       </Box>
     </Box>
   )

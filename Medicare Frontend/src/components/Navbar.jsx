@@ -53,6 +53,7 @@ const Navbar = () => {
             fontWeight: 'bold',
             color: 'white',
             textDecoration: 'none',
+            fontSize: '25px',
           }}
         >
           MediCare
@@ -84,7 +85,7 @@ const Navbar = () => {
               onClick={() => setActiveNav('#')}
               className={activeNav === '/#' ? 'active' : ''}
             >
-              Home
+              HOME
             </a>
           </Button>
           <Button
@@ -103,7 +104,7 @@ const Navbar = () => {
               onClick={() => setActiveNav('#About')}
               className={activeNav === '/#About' ? 'active' : ''}
             >
-              About
+              ABOUT
             </a>
           </Button>
           <Button
@@ -122,7 +123,7 @@ const Navbar = () => {
               onClick={() => setActiveNav('#Services')}
               className={activeNav === '/#Services' ? 'active' : ''}
             >
-              Services
+              SERVICES
             </a>
           </Button>
           <Button
@@ -137,7 +138,7 @@ const Navbar = () => {
               },
             }}
           >
-            <Link to={'/LoginSignUp'}>Login/Signup</Link>
+            <Link to={'/LoginSignUp'}>LOGIN/SIGNUP</Link>
           </Button>
         </Box>
         <IconButton
@@ -156,16 +157,16 @@ const Navbar = () => {
           sx={{ display: { xs: 'block', md: 'none' }, borderRadius: 2 }}
         >
           <MenuItem onClick={handleMenuClose}>
-            <a href="/#Home">Home</a>{' '}
+            <a href="/#Home">HOME</a>{' '}
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
-            <a href="/#About">About</a>{' '}
+            <a href="/#About">ABOUT</a>{' '}
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
-            <a href="/#Services">Services</a>{' '}
+            <a href="/#Services">SERVICES</a>{' '}
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
-            <a href="/LoginSignUp">Login/Signup</a>
+            <a href="/LoginSignUp">LOGIN/SIGNUP</a>
           </MenuItem>
         </Menu>
       </Toolbar>
