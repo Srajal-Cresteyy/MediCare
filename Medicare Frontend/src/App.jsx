@@ -11,6 +11,8 @@ import LandingPage from './pages/LandingPage'
 import LoginSignUpPage from './pages/LoginSignUpPage'
 import TestComponent from './components/TestComponent'
 import { Dashboard } from '@mui/icons-material'
+import ProtectedRoute from './components/security/ProtectedRoute' // Import ProtectedRoute
+import LoggedInLayouts from './layouts/LoggedInLayouts'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +22,16 @@ const router = createBrowserRouter(
         <Route path="/LoginSignUp" element={<LoginSignUpPage />} />
       </Route>
       <Route path="/content" element={<TestComponent />} />
-      <Route path="/Dashboard" element={<Dashboard />} />
+      <Route
+        path="/auth"
+        element={
+          <ProtectedRoute>
+            <LoggedInLayouts />
+          </ProtectedRoute>
+        }
+      >
+        <Route index path="dashboard" element={<Dashboard />} />
+      </Route>
     </>
   )
 )

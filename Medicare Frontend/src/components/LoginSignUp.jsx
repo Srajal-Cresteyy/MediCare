@@ -28,7 +28,7 @@ const LoginSignup = () => {
       })
       if (response.data !== 'Invalid credentials') {
         localStorage.setItem('token', response.data) // Store token
-        navigate('/dashboard') // Navigate to dashboard
+        navigate('/auth/dashboard') // Navigate to dashboard
       } else {
         setMessage('Invalid credentials')
       }
