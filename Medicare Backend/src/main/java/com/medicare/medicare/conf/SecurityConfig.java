@@ -20,8 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.time.LocalDate;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -80,9 +78,9 @@ public class SecurityConfig {
 
     @Bean
     public CommandLineRunner initData( UserRepository userRepository) {
-
+        boolean checkUserExists = userRepository.existsByUserName("admin@admin.com") ;
         return args -> {
-            if(!userRepository.existsByUserName("admin")) {
+            if(!checkUserExists) {
                 User admin = new User();
                 admin.setUserName("admin@admin.com");
                 admin.setPassword("admin");
