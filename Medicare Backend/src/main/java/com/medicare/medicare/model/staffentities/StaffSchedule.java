@@ -1,6 +1,6 @@
 package com.medicare.medicare.model.staffentities;
 
-import com.medicare.medicare.utility.enums.Present;
+import com.medicare.medicare.enums.Present;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;

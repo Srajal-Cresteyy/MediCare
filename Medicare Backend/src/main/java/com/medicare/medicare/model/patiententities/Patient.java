@@ -3,7 +3,7 @@ package com.medicare.medicare.model.patiententities;
 import com.medicare.medicare.model.labentities.LabTest;
 import com.medicare.medicare.model.vaccinationentities.Vaccination;
 import com.medicare.medicare.model.appointment.Appointment;
-import com.medicare.medicare.utility.enums.Gender;
+import com.medicare.medicare.enums.Gender;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

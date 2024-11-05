@@ -1,4 +1,4 @@
-package com.medicare.medicare.security.utility;
+package com.medicare.medicare.utility;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

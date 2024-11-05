@@ -1,4 +1,4 @@
-package com.medicare.medicare.security.model;
+package com.medicare.medicare.model.security;
 
 import jakarta.persistence.*;
 import lombok.Data;

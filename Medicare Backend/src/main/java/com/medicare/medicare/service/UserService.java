@@ -1,8 +1,9 @@
-package com.medicare.medicare.security.service;
+package com.medicare.medicare.service;
 
-import com.medicare.medicare.security.model.User;
+import com.medicare.medicare.model.security.User;
 
 public interface UserService {
     User findByUsername(String username);
+
     User saveUser(User user);
 }

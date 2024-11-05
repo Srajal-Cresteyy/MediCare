@@ -1,6 +1,6 @@
-package com.medicare.medicare.security.repository;
+package com.medicare.medicare.repository;
 
-import com.medicare.medicare.security.model.User;
+import com.medicare.medicare.model.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

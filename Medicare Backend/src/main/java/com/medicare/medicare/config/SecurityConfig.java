@@ -1,9 +1,9 @@
-package com.medicare.medicare.conf;
+package com.medicare.medicare.config;
 
-import com.medicare.medicare.security.model.User;
-import com.medicare.medicare.security.repository.UserRepository;
-import com.medicare.medicare.security.service.UserServiceImpl;
-import com.medicare.medicare.security.utility.JwtTokenUtil;
+import com.medicare.medicare.model.security.User;
+import com.medicare.medicare.repository.UserRepository;
+import com.medicare.medicare.service.UserServiceImpl;
+import com.medicare.medicare.utility.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

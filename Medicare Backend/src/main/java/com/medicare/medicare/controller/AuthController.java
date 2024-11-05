@@ -1,16 +1,18 @@
-package com.medicare.medicare.security.controller;
+package com.medicare.medicare.controller;
 
-import com.medicare.medicare.security.utility.JwtTokenUtil;
+import com.medicare.medicare.utility.JwtTokenUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/auth")
 public class AuthController {
 

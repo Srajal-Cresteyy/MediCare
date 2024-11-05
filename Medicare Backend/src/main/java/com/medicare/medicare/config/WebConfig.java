@@ -1,4 +1,4 @@
-package com.medicare.medicare.conf;
+package com.medicare.medicare.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

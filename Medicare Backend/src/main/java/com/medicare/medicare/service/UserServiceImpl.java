@@ -1,7 +1,7 @@
-package com.medicare.medicare.security.service;
+package com.medicare.medicare.service;
 
-import com.medicare.medicare.security.model.User;
-import com.medicare.medicare.security.repository.UserRepository;
+import com.medicare.medicare.model.security.User;
+import com.medicare.medicare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

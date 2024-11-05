@@ -1,4 +1,4 @@
-package com.medicare.medicare.utility.enums;
+package com.medicare.medicare.enums;
 
 public enum Position {
     DOCTOR,

@@ -3,7 +3,7 @@ package com.medicare.medicare.model.staffentities;
 import com.medicare.medicare.model.vaccinationentities.Vaccination;
 import com.medicare.medicare.model.appointment.Appointment;
 import com.medicare.medicare.model.patiententities.DepartmentFacilityMapping;
-import com.medicare.medicare.utility.enums.Position;
+import com.medicare.medicare.enums.Position;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;

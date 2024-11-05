@@ -3,7 +3,7 @@ package com.medicare.medicare.model.appointment;
 
 import com.medicare.medicare.model.patiententities.Patient;
 import com.medicare.medicare.model.staffentities.Staff;
-import com.medicare.medicare.utility.enums.Status;
+import com.medicare.medicare.enums.Status;
 import jakarta.persistence.*;
 import lombok.Data;
 
