@@ -10,7 +10,7 @@ import MainLayout from './layouts/MainLayout'
 import LandingPage from './pages/LandingPage'
 import LoginSignUpPage from './pages/LoginSignUpPage'
 import TestComponent from './components/TestComponent'
-import { Dashboard } from '@mui/icons-material'
+import Dashboard from './components/Dashboard'
 import ProtectedRoute from './components/security/ProtectedRoute' // Import ProtectedRoute
 import LoggedInLayouts from './layouts/LoggedInLayouts'
 

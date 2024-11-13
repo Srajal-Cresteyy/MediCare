@@ -6,7 +6,6 @@ import {
 import SideNavbarLinks from './SideNavbarLinks'
 import { HiOutlineLogout } from 'react-icons/hi'
 import classNames from 'classnames'
-import { NavLink } from 'react-router-dom'
 
 const typoStyles = {
   fontWeight: 'bold',
