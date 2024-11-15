@@ -9,7 +9,7 @@ const LoggedInLayouts = () => {
       <SideNavbar />
       <div className="flex flex-col flex-1">
         <Header />
-        <div className="p-4">
+        <div className="h-screen overflow-auto p-4">
           <div>{<Outlet />}</div>
         </div>
       </div>

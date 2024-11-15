@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const recentCases = [
   {
     id: '1',
@@ -63,37 +65,68 @@ const recentCases = [
 
 const RecentCases = () => {
   return (
-    <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1 ">
-      <strong className="text-gray-700 font-medium">Recent Cases</strong>
-      <div className="mt-3">
-        <table>
+    <div className="bg-white px-6 pt-4 pb-6 rounded-lg shadow-md border border-gray-300 flex-1">
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">Recent Cases</h2>
+      {/* Add max-width and horizontal scroll */}
+      <div className="overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[800px]">
           <thead>
-            <td>Doctor Id</td>
-            <td>Patient Id</td>
-            <td>Patient Name</td>
-            <td>Date</td>
-            <td>Total</td>
-            <td>Current Status</td>
-            <td>Patient Address</td>
+            <tr className="bg-gray-100 border-b border-gray-200">
+              <th className="px-4 py-2 text-gray-700 font-medium">Doctor ID</th>
+              <th className="px-4 py-2 text-gray-700 font-medium">
+                Patient ID
+              </th>
+              <th className="px-4 py-2 text-gray-700 font-medium">
+                Patient Name
+              </th>
+              <th className="px-4 py-2 text-gray-700 font-medium">Date</th>
+              <th className="px-4 py-2 text-gray-700 font-medium">Total</th>
+              <th className="px-4 py-2 text-gray-700 font-medium">Status</th>
+              <th className="px-4 py-2 text-gray-700 font-medium">Address</th>
+            </tr>
           </thead>
           <tbody>
-            {recentCases.map((recentCase) => {
-              return (
-                <tr key={recentCase.id}>
-                  <td>{recentCase.doctor_id}</td>
-                  <td>{recentCase.patient_id}</td>
-                  <td>{recentCase.patient_name}</td>
-                  <td>{recentCase.date}</td>
-                  <td>{recentCase.total}</td>
-                  <td>{recentCase.current_status}</td>
-                  <td>{recentCase.patient_address}</td>
-                </tr>
-              )
-            })}
+            {recentCases.map((recentCase, index) => (
+              <tr
+                key={recentCase.id}
+                className={`border-b ${
+                  index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                } hover:bg-gray-100 transition`}
+              >
+                <td className="px-4 py-2">
+                  <Link to={`doctors/${recentCase.doctor_id}`}>
+                    {recentCase.doctor_id}
+                  </Link>
+                </td>
+                <td className="px-4 py-2">
+                  <Link to={`doctors/${recentCase.patient_id}`}>
+                    {recentCase.patient_id}
+                  </Link>
+                </td>
+                <td className="px-4 py-2">{recentCase.patient_name}</td>
+                <td className="px-4 py-2">
+                  {new Date(recentCase.date).toLocaleDateString()}
+                </td>
+                <td className="px-4 py-2">{recentCase.total}</td>
+                <td
+                  className={`px-4 py-2 font-medium ${
+                    recentCase.current_status === 'Closed'
+                      ? 'text-green-600'
+                      : recentCase.current_status === 'OUT_FOR_DELIVERY'
+                      ? 'text-orange-600'
+                      : 'text-gray-600'
+                  }`}
+                >
+                  {recentCase.current_status}
+                </td>
+                <td className="px-4 py-2">{recentCase.patient_address}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </div>
   )
 }
+
 export default RecentCases

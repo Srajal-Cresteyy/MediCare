@@ -1,4 +1,4 @@
-import { Box, linkClasses, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import {
   DASHBOARD_SIDEBAR_BOTTOM_LINKS,
   DASHBOARD_SIDEBAR_LINKS,
@@ -14,12 +14,12 @@ const typoStyles = {
 }
 
 const linkClass =
-  'flex items-center gap-2 font-light px-3 py-2 hover:bg-neutral-700 hover:no-underline active:bg-neutral-600 rounded-sm text-base'
+  'flex items-center gap-2 font-light px-3 py-2 rounded-lg text-base transition-colors duration-300 hover:bg-gradient-to-r hover:from-[#2196F3] hover:via-[#2196F3] hover:to-[#2196F3] hover:text-white active:bg-[#2196F3]'
 
 const SideNavbar = () => {
   return (
     <>
-      <div className="bg-neutral-900 w-60 p-3 flex flex-col text-white ">
+      <div className="  bg-gradient-to-r from-[#2196F3] 80% via-[#64B5F6] 10% to-[#21CBF3] w-60 p-3 flex flex-col text-white shadow-2xl">
         <div className="flex items-start px-1 py-3">
           <Typography variant="h6" sx={{ ...typoStyles }}>
             MediCare
@@ -30,7 +30,7 @@ const SideNavbar = () => {
             return <SideNavbarLinks item={item} key={item.key} />
           })}
         </div>
-        <div className="flex flex-col gap-0.5 pt border-t border-neutral-700">
+        <div className="flex flex-col gap-0.5 pt-4">
           {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((item) => {
             return <SideNavbarLinks item={item} key={item.key} />
           })}
@@ -45,4 +45,5 @@ const SideNavbar = () => {
     </>
   )
 }
+
 export default SideNavbar
