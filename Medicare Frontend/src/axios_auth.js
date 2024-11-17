@@ -4,27 +4,22 @@ const API_BASE_URL = 'http://localhost:8088/auth'
 
 class AuthService {
   // Login method that accepts username and password as parameters
-  async login(username, password) {
+  async login(username, password, role) {
     try {
-      // Create credentials object
-      const credentials = {
-        userName: username,
-        password: password,
-      }
+      const credentials = { userName: username, password: password, role } // Include role in the payload
 
-      // Make the POST request to the login endpoint
       const response = await axios.post(`${API_BASE_URL}/login`, credentials)
-      const token = response.data // Assuming the response contains the JWT
+      const { token, role: userRole } = response.data // Destructure token and role
 
-      // Store the token in local storage for future requests
       if (token) {
-        localStorage.setItem('token', token)
+        localStorage.setItem('token', token) // Store token
+        localStorage.setItem('role', userRole) // Store user role for further use
       }
 
-      return token // Return the token or response data
+      return response.data // Return the full response for navigation
     } catch (error) {
       console.error('Login failed:', error)
-      throw error // Rethrow the error for further handling
+      throw error
     }
   }
 

@@ -8,7 +8,7 @@ const LoginSignup = () => {
   const [tab, setTab] = useState('login')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('user') // Initialize the role
+  const [role, setRole] = useState('ADMIN') // Initialize the role
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState('')
   const theme = useTheme()
@@ -21,14 +21,19 @@ const LoginSignup = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const response = await AuthService.login({
-        userName: username,
-        password,
-        role,
-      })
-      if (response.data !== 'Invalid credentials') {
-        localStorage.setItem('token', response.data) // Store token
-        navigate('/auth/dashboard') // Navigate to dashboard
+      const response = await AuthService.login(username, password, role) // Pass role
+
+      if (response.token) {
+        const userRole = response.role
+
+        // Navigate based on role
+        if (userRole === 'ROLE_DOCTOR') {
+          navigate('/auth/doctorDashboard')
+        } else if (userRole === 'ROLE_ADMIN') {
+          navigate('/auth/dashboard')
+        } else {
+          navigate('/auth/commonDashboard')
+        }
       } else {
         setMessage('Invalid credentials')
       }

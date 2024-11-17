@@ -26,57 +26,48 @@ const stats = [
 const data = [
   {
     name: 'John',
-    solvedCases: 4000,
-    onGoingCases: 2400,
+    feedback: 100,
   },
   {
     name: 'Ricky',
-    solvedCases: 3000,
-    onGoingCases: 1398,
+    feedback: 100,
   },
   {
     name: 'Anu',
-    solvedCases: 2400,
-    onGoingCases: 1498,
+    feedback: 100,
   },
   {
     name: 'Alex',
-    solvedCases: 3320,
-    onGoingCases: 1198,
+    feedback: 100,
   },
   {
     name: 'Aren',
-    solvedCases: 1200,
-    onGoingCases: 298,
+    feedback: 100,
   },
   {
     name: 'Ani',
-    solvedCases: 4500,
-    onGoingCases: 1313,
+    feedback: 100,
   },
   {
     name: 'Sid',
-    solvedCases: 3420,
-    onGoingCases: 1198,
+    feedback: 100,
   },
   {
     name: 'Ari',
-    solvedCases: 3130,
-    onGoingCases: 198,
+    feedback: 100,
   },
   {
     name: 'Avi',
-    solvedCases: 3130,
-    onGoingCases: 398,
+    feedback: 100,
   },
 ]
 
-const Dashboard = () => {
+const DoctorDashboard = () => {
   return (
     <div className="flex flex-col gap-4">
       <AdminStatsGrid stats={stats} />
       <div className="flex flex-row gap-4 w-full">
-        <TransactionChart transactionData={data} roleAccess={'ADMIN'} />
+        <TransactionChart transactionData={data} roleAccess={'DOCTOR'} />
         <DiversityChart />
       </div>
       <div className="flex flex-row gap-4 w-full">
@@ -86,4 +77,4 @@ const Dashboard = () => {
     </div>
   )
 }
-export default Dashboard
+export default DoctorDashboard

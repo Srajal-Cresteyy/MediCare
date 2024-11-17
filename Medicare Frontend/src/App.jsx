@@ -1,5 +1,4 @@
 import './App.css'
-import Navbar from './components/Navbar'
 import {
   Route,
   createBrowserRouter,
@@ -13,6 +12,7 @@ import TestComponent from './components/TestComponent'
 import Dashboard from './components/Dashboard'
 import ProtectedRoute from './components/security/ProtectedRoute' // Import ProtectedRoute
 import LoggedInLayouts from './layouts/LoggedInLayouts'
+import DoctorDashboard from './components/DoctorDashboard'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,15 +22,24 @@ const router = createBrowserRouter(
         <Route path="/LoginSignUp" element={<LoginSignUpPage />} />
       </Route>
       <Route path="/content" element={<TestComponent />} />
-      <Route
-        path="/auth"
-        element={
-          <ProtectedRoute>
-            <LoggedInLayouts />
-          </ProtectedRoute>
-        }
-      >
-        <Route index path="dashboard" element={<Dashboard />} />
+      <Route path="/auth" element={<LoggedInLayouts />}>
+        <Route
+          index
+          path="dashboard"
+          element={
+            <ProtectedRoute roleRequired={'ADMIN'}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="doctorDashboard"
+          element={
+            <ProtectedRoute roleRequired={'DOCTOR'}>
+              <DoctorDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Route>
     </>
   )
