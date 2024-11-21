@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Table(name = "")
 public class Expenses {
     @Id
-    @Column(name = "Expense_ID")
+    @Column(name = "Expense_ID_HMS")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long expenseID;
 

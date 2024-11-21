@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "Hospital_Staff_Schedule")
+@Table(name = "Hospital_Staff_Schedule_HMS")
 public class StaffSchedule {
     @Id
     @Column(name = "Staff_Schedule_ID")

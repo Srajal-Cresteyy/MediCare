@@ -1,14 +1,14 @@
 package com.medicare.medicare.security.controller;
 
+import com.medicare.medicare.security.dto.LoginRequest;
 import com.medicare.medicare.security.utility.JwtTokenUtil;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -24,31 +24,44 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(HttpServletRequest request) {
-        System.out.println("Inside Authentication");
+    public Map<String, String> login(@RequestBody LoginRequest loginRequest) {
+        Map<String, String> response = new HashMap<>();
         try {
-            // Retrieve the Authorization header
-            String authHeader = request.getHeader("Authorization");
-            if (authHeader != null && authHeader.startsWith("Basic ")) {
-                // Decode the base64 encoded credentials
-                String base64Credentials = authHeader.substring("Basic ".length()).trim();
-                String credentials = new String(Base64.getDecoder().decode(base64Credentials), StandardCharsets.UTF_8);
-                String[] userPass = credentials.split(":", 2); // Split username and password
+            String username = loginRequest.getUserName();
+            String password = loginRequest.getPassword();
+            String role = "ROLE_" + loginRequest.getRole(); // Extract role from request
 
-                String username = userPass[0];
-                String password = userPass[1];
+            System.out.println("User Name : " + username);
+            System.out.println("User Pass : " + password);
+            System.out.println("User Role : " + role);
 
-                // Authenticate the user
-                var authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-                var authentication = authenticationManager.authenticate(authenticationToken);
-                return jwtTokenUtil.generateToken(authentication.getName());
-            } else {
-                return "Missing Authorization Header";
+
+
+            // Authenticate the user
+            var authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+            var authentication = authenticationManager.authenticate(authenticationToken);
+
+            // Validate the user's role
+            boolean hasRequiredRole = authentication.getAuthorities()
+                    .stream()
+                    .anyMatch(authority -> authority.getAuthority().equals(role));
+
+            if (!hasRequiredRole) {
+                throw new RuntimeException("Unauthorized: Role mismatch");
             }
+
+            // Generate JWT and return role
+            String token = jwtTokenUtil.generateToken(authentication.getName());
+            response.put("token", token);
+            response.put("role", role); // Send the user's role back
+            return response;
         } catch (AuthenticationException e) {
-            return "Invalid credentials";
+            response.put("error", "Invalid credentials");
+            return response;
         } catch (Exception e) {
-            return "Authentication failed";
+            response.put("error", "Authentication failed");
+            return response;
         }
     }
 }
+

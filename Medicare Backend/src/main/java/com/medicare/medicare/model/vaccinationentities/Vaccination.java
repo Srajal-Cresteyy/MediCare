@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Vaccination")
+@Table(name = "Vaccination_HMS")
 @NoArgsConstructor
 public class Vaccination {
     @Id

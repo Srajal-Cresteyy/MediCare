@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "Patient")
+@Table(name = "Patient_HMS")
 public class Patient {
     @Id
     @Column(name = "Patient_ID")

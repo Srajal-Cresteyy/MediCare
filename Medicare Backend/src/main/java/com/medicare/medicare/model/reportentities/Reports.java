@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+
+@Entity
+@Table(name = "Staff_Reports_HMS")
 public class Reports {
     @Id
     @Column(name = "Report_ID")

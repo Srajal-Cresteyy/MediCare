@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "Patient_Medical_History")
+@Table(name = "Patient_Medical_History_HMS")
 public class PatientHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

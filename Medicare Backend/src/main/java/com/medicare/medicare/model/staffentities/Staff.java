@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Hospital_Staff")
+@Table(name = "Hospital_Staff_HMS")
 public class Staff {
     @Id
     @Column(name = "Staff_ID")
