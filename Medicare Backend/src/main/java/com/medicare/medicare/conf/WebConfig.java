@@ -23,7 +23,7 @@ public class WebConfig {
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:5173/");
         config.setAllowedHeaders(Arrays.asList(
-//                HttpHeaders.AUTHORIZATION,
+                HttpHeaders.AUTHORIZATION,
                 HttpHeaders.CONTENT_TYPE,
                 HttpHeaders.ACCEPT
         ));
