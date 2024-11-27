@@ -13,6 +13,7 @@ import Dashboard from './components/Dashboard'
 import ProtectedRoute from './components/security/ProtectedRoute' // Import ProtectedRoute
 import LoggedInLayouts from './layouts/LoggedInLayouts'
 import DoctorDashboard from './components/DoctorDashboard'
+import TestComponentDashboard from './components/TestComponentDashboard'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,6 +42,15 @@ const router = createBrowserRouter(
           }
         />
       </Route>
+
+      <Route
+        path="doctorDashboardTest"
+        element={
+          <ProtectedRoute roleRequired={'DOCTOR'}>
+            <TestComponentDashboard />
+          </ProtectedRoute>
+        }
+      />
     </>
   )
 )

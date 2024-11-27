@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { API_BACKEND_URL } from './apiConfig'
 
-const API_BASE_URL = 'http://localhost:8088/auth'
+const API_BASE_URL = `${API_BACKEND_URL}/auth`
 
 class AuthService {
   // Login method that accepts username and password as parameters
