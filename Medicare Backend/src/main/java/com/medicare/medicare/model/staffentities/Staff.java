@@ -2,7 +2,7 @@ package com.medicare.medicare.model.staffentities;
 
 import com.medicare.medicare.model.vaccinationentities.Vaccination;
 import com.medicare.medicare.model.appointment.Appointment;
-import com.medicare.medicare.model.patiententities.DepartmentFacilityMapping;
+import com.medicare.medicare.model.facilityentities.DepartmentFacilityMapping;
 import com.medicare.medicare.utility.enums.Position;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,6 +16,9 @@ public class Staff {
     @Id
     @Column(name = "Staff_ID")
     private int staffID;
+
+    @Column(name = "User_Name")
+    private String staffUserName;
 
     @Column(name = "Staff_First_Name")
     private String firstName;

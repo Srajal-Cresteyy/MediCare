@@ -1,6 +1,6 @@
 package com.medicare.medicare.model.financeentities;
 
-import com.medicare.medicare.model.patiententities.DepartmentFacilityMapping;
+import com.medicare.medicare.model.facilityentities.DepartmentFacilityMapping;
 import jakarta.persistence.*;
 import lombok.Data;
 

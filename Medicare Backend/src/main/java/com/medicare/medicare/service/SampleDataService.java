@@ -2,14 +2,11 @@ package com.medicare.medicare.service;
 
 import com.medicare.medicare.dao.*;
 import com.medicare.medicare.model.appointment.Appointment;
-import com.medicare.medicare.model.facilityentities.Departments;
-import com.medicare.medicare.model.facilityentities.Facilities;
-import com.medicare.medicare.model.patiententities.DepartmentFacilityMapping;
 import com.medicare.medicare.model.patiententities.Patient;
 import com.medicare.medicare.model.staffentities.Staff;
+import com.medicare.medicare.utility.enums.Gender;
 import com.medicare.medicare.utility.enums.Position;
 import com.medicare.medicare.utility.enums.Status;
-import com.medicare.medicare.utility.enums.Gender;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +14,27 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+
+
+// This Service is used to Insert the Demo Data inside the Database
 
 @Service
 @Transactional
 public class SampleDataService {
+    private final PatientDAO patientDAO;
+    private final StaffDAO staffDAO;
+    private final AppointmentDAO appointmentDAO;
+    private final FacilityDAO facilityDAO;
+    private final DepartmentDAO departmentDAO;
 
     @Autowired
-    private PatientDAO patientDAO;
-
-    @Autowired
-    private StaffDAO staffDAO;
-
-    @Autowired
-    private AppointmentDAO appointmentDAO;
-
-    @Autowired
-    private FacilityDAO facilityDAO;
-
-    @Autowired
-    private DepartmentDAO departmentDAO;
+    SampleDataService(PatientDAO patientDAO , StaffDAO staffDAO , AppointmentDAO appointmentDAO , FacilityDAO facilityDAO , DepartmentDAO departmentDAO){
+        this.staffDAO = staffDAO;
+        this.patientDAO = patientDAO;
+        this.appointmentDAO = appointmentDAO;
+        this.facilityDAO = facilityDAO;
+        this.departmentDAO = departmentDAO;
+    }
 
     @Value("${insert.sample.data:true}") // Default value is false
     private String insertSampleData;
@@ -50,66 +48,42 @@ public class SampleDataService {
 
     public void insertSampleData() {
         // Create a Facility
-        Facilities facility = new Facilities();
-        facility.setFacilityName("MediCare Hospital");
-        facility.setFacilityAddress("123 Health Street, Cityville");
-        facility.setFacilityContactNumber(1234567890L);
-        facility.setFacilityEmail("contact@medicarehospital.com");
 
-        // Save the facility
-        facility = facilityDAO.save(facility);
-
-        // Create a Department
-        Departments department = new Departments();
-        department.setDepartmentName("Cardiology");
-        department.setDepartmentDescription("Department for heart-related issues.");
-
-        // Save the department
-        department = departmentDAO.save(department);
-
-        // Create DepartmentFacilityMapping for the Doctor (Staff)
-        DepartmentFacilityMapping departmentFacilityMapping = new DepartmentFacilityMapping();
-        departmentFacilityMapping.setDepartment(department); // Set the department
-        departmentFacilityMapping.setFacility(facility); // Set the facility
-
-        // Create Staff (Doctor)
         Staff doctor = new Staff();
-        doctor.setFirstName("Dr. John");
-        doctor.setLastName("Doe");
-        doctor.setPosition(Position.DOCTOR);  // Assuming Position is an Enum with DOCTOR value
-        doctor.setHireDate(LocalDate.of(2010, 1, 1));
+        doctor.setStaffUserName("ArvindSharma");
+        doctor.setFirstName("Arvind");
+        doctor.setLastName("Sharma");
+        doctor.setPosition(Position.DOCTOR);
+        // Staff Department Mapping
+        doctor.setHireDate(LocalDate.now());
         doctor.setContactNumber(9876543210L);
-        doctor.setStaffDepartment(departmentFacilityMapping); // Set the DepartmentFacilityMapping
+        // Vaccinations Administered
+        // Appointment Mapping
+        staffDAO.save(doctor);
 
-        // Save the doctor (staff)
-        doctor = staffDAO.save(doctor);
-
-        // Create a Patient
         Patient patient = new Patient();
-        patient.setFirstName("Alice");
-        patient.setLastName("Smith");
-        patient.setDateOfBirth(LocalDate.of(1985, 5, 20));
-        patient.setGender(Gender.FEMALE);
-        patient.setAddress("456 Patient Avenue, Cityville");
-        patient.setPhoneNumber(1122334455L);
-        patient.setEmail("alice.smith@email.com");
-        patient.setEmergencyContact(9988776655L);
+        patient.setFirstName("Srajal");
+        patient.setLastName("Dwivedi");
+        patient.setDateOfBirth(LocalDate.of(2001,11,19));
+        patient.setGender(Gender.MALE);
+        patient.setAddress("Pune, Maharashtra");
+        patient.setPhoneNumber(9876543210L);
+        patient.setEmail("srajaldwivedi@email.com");
+        patient.setEmergencyContact(1234567890L);
+        patientDAO.save(patient);
 
-        // Save the patient
-        patient = patientDAO.save(patient);
-
-        // Create an Appointment for the Patient
+        // Setting Appointment Object
         Appointment appointment = new Appointment();
-        appointment.setAppointmentDate(LocalDate.of(2024, 12, 10));
-        appointment.setAppointmentTime("10:00 AM");
-        appointment.setAppointmentStatus(Status.INACTIVE);
-        appointment.setAppointmentNotes("Consultation for heart checkup.");
         appointment.setPatient(patient);
         appointment.setDoctor(doctor);
-
-        // Save the appointment
+        appointment.setAppointmentDate(LocalDate.now());
+        appointment.setAppointmentTime("19:50");
+        appointment.setAppointmentStatus(Status.ACTIVE);
+        appointment.setAppointmentNotes("This is Appointment is for Cardiac Problems !");
         appointmentDAO.save(appointment);
 
-        System.out.println("Sample data has been inserted successfully!");
+
+
+
     }
 }

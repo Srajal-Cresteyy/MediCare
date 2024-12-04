@@ -1,4 +1,4 @@
-package com.medicare.medicare.model.patiententities;
+package com.medicare.medicare.model.facilityentities;
 
 import com.medicare.medicare.model.financeentities.Expenses;
 import com.medicare.medicare.model.staffentities.Staff;
