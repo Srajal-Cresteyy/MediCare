@@ -11,6 +11,7 @@ import java.time.LocalDate;
 public class StaffSchedule {
     @Id
     @Column(name = "Staff_Schedule_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int scheduleID;
 
     @ManyToOne

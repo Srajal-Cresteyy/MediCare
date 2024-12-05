@@ -14,6 +14,7 @@ import java.util.List;
 public class Departments {
     @Id
     @Column(name = "Department_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int departmentID;
 
     @Column(name = "Department_Name")

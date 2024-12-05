@@ -15,9 +15,10 @@ import java.util.List;
 public class Staff {
     @Id
     @Column(name = "Staff_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int staffID;
 
-    @Column(name = "User_Name")
+    @Column(name = "User_Name" , nullable = false , unique = true)
     private String staffUserName;
 
     @Column(name = "Staff_First_Name")
@@ -42,6 +43,6 @@ public class Staff {
     @OneToMany
     private List<Vaccination> vaccinationsAdministered;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "doctor")
     private List<Appointment> appointments;
 }
