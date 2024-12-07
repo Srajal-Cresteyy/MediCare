@@ -6,6 +6,7 @@ import {
 import SideNavbarLinks from './SideNavbarLinks'
 import { HiOutlineLogout } from 'react-icons/hi'
 import classNames from 'classnames'
+import { useLogout } from '../../authUtils'
 
 const typoStyles = {
   fontWeight: 'bold',
@@ -17,6 +18,7 @@ const linkClass =
   'flex items-center gap-2 font-light px-3 py-2 rounded-lg text-base transition-colors duration-300 hover:bg-gradient-to-r hover:from-[#2196F3] hover:via-[#2196F3] hover:to-[#2196F3] hover:text-white active:bg-[#2196F3]'
 
 const SideNavbar = () => {
+  const handleLogOut = useLogout()
   return (
     <>
       <div className="  bg-gradient-to-r from-[#2196F3] 80% via-[#64B5F6] 10% to-[#21CBF3] w-60 p-3 flex flex-col text-white shadow-2xl">
@@ -34,7 +36,10 @@ const SideNavbar = () => {
           {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((item) => {
             return <SideNavbarLinks item={item} key={item.key} />
           })}
-          <div className={classNames('text-red-700', linkClass)}>
+          <div
+            className={classNames('text-red-700 cursor-pointer', linkClass)}
+            onClick={handleLogOut}
+          >
             <span className="text-xl">
               <HiOutlineLogout />
             </span>

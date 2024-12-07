@@ -89,10 +89,12 @@ const RecentCases = () => {
               <th className="px-4 py-2 text-gray-700 font-medium">
                 Patient Name
               </th>
-              <th className="px-4 py-2 text-gray-700 font-medium">Date</th>
-              <th className="px-4 py-2 text-gray-700 font-medium">Total</th>
+              <th className="px-4 py-2 text-gray-700 font-medium">
+                Appointment Date
+              </th>
               <th className="px-4 py-2 text-gray-700 font-medium">Status</th>
               <th className="px-4 py-2 text-gray-700 font-medium">Address</th>
+              <th className="px-4 py-2 text-gray-700 font-medium">Phone</th>
             </tr>
           </thead>
           <tbody>
@@ -104,8 +106,8 @@ const RecentCases = () => {
                 } hover:bg-gray-100 transition`}
               >
                 <td className="px-4 py-2">
-                  <Link to={`doctors/${recentCase.doctor_id}`}>
-                    {recentCase.doctor_id}
+                  <Link to={`doctors/${recentCase.staffID}`}>
+                    {recentCase.staffID}
                   </Link>
                 </td>
                 <td className="px-4 py-2">
@@ -117,21 +119,13 @@ const RecentCases = () => {
                   {recentCase.firstName} {recentCase.lastName}
                 </td>
                 <td className="px-4 py-2">
-                  {new Date(recentCase.dateOfBirth).toLocaleDateString()}
+                  {new Date(recentCase.dateOfAppointment).toLocaleDateString()}
                 </td>
-                <td className="px-4 py-2">{recentCase.total || '-'}</td>
-                <td
-                  className={`px-4 py-2 font-medium ${
-                    recentCase.currentStatus === 'Closed'
-                      ? 'text-green-600'
-                      : recentCase.currentStatus === 'OUT_FOR_DELIVERY'
-                      ? 'text-orange-600'
-                      : 'text-gray-600'
-                  }`}
-                >
-                  {recentCase.currentStatus || 'N/A'}
+                <td className="px-4 py-2">
+                  {recentCase.appointmentStatus || 'N/A'}
                 </td>
                 <td className="px-4 py-2">{recentCase.address}</td>
+                <td className="px-4 py-2">{recentCase.phoneNumber}</td>
               </tr>
             ))}
           </tbody>

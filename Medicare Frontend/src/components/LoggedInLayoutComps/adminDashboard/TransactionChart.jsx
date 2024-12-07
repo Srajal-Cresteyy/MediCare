@@ -32,7 +32,9 @@ const TransactionChart = ({ transactionData, roleAccess }) => {
             <Tooltip />
             <Legend />
             <Bar
-              dataKey={roleAccess === 'ADMIN' ? 'solvedCases' : 'feedback'}
+              dataKey={
+                roleAccess === 'ADMIN' ? 'solvedCases' : 'No Of Appointments'
+              }
               fill="#0ea5e9"
             />
             {/* Conditionally render the ongoingCases Bar only if roleAccess is ADMIN */}

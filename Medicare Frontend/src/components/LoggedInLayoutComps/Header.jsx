@@ -16,8 +16,11 @@ import {
 import { Fragment } from 'react'
 import classNames from 'classnames'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { useLogout } from '../../authUtils'
+
 const Header = () => {
   const navigate = useNavigate()
+  const handleLogout = useLogout()
   return (
     <div className="bg-white h-16 px-4 flex justify-between items-center border-b border-gray-200">
       <div className="relative">
@@ -153,7 +156,7 @@ const Header = () => {
               <MenuItem>
                 {({ active }) => (
                   <div
-                    onClick={() => navigate('/logout')}
+                    onClick={handleLogout}
                     className={classNames(
                       active && 'bg-gray-100',
                       'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
