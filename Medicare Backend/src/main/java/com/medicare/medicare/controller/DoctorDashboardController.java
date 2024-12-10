@@ -1,5 +1,6 @@
 package com.medicare.medicare.controller;
 
+import com.medicare.medicare.dto.doctordashboard.RecentCasesDto;
 import com.medicare.medicare.model.patiententities.Patient;
 import com.medicare.medicare.service.RecentCasesService;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class DoctorDashboardController {
             String loggedInDoctorUsername = SecurityContextHolder.getContext().getAuthentication().getName();
 
             // Retrieve recent appointments and extract patients
-            List<Patient> patients = recentCasesService.fetchRecentPatients(loggedInDoctorUsername);
+            List<RecentCasesDto> patients = recentCasesService.fetchRecentPatients(loggedInDoctorUsername);
 
             if (patients.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No recent cases found for the logged-in doctor.");

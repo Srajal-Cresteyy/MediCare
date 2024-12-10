@@ -1,9 +1,8 @@
 package com.medicare.medicare.service;
 
-import com.medicare.medicare.model.patiententities.Patient;
-
+import com.medicare.medicare.dto.doctordashboard.RecentCasesDto;
 import java.util.List;
 
 public interface RecentCasesService {
-    public List<Patient> fetchRecentPatients(String userName);
+    public List<RecentCasesDto> fetchRecentPatients(String userName);
 }
