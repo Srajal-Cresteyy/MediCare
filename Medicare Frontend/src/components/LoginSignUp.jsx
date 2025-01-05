@@ -31,8 +31,10 @@ const LoginSignup = () => {
           navigate('/auth/doctorDashboard')
         } else if (userRole === 'ROLE_ADMIN') {
           navigate('/auth/dashboard')
+        } else if (userRole === 'ROLE_USER') {
+          navigate('/auth/patientDashboard')
         } else {
-          navigate('/auth/commonDashboard')
+          navigate('/')
         }
       } else {
         setMessage('Invalid credentials')

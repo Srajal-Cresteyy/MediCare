@@ -14,6 +14,7 @@ import ProtectedRoute from './components/security/ProtectedRoute' // Import Prot
 import LoggedInLayouts from './layouts/LoggedInLayouts'
 import DoctorDashboard from './components/DoctorDashboard'
 import TestComponentDashboard from './components/TestComponentDashboard'
+import PatientDashboard from './components/PatientDashboard'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,6 +39,14 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute roleRequired={'DOCTOR'}>
               <DoctorDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="patientDashboard"
+          element={
+            <ProtectedRoute roleRequired={'USER'}>
+              <PatientDashboard />
             </ProtectedRoute>
           }
         />

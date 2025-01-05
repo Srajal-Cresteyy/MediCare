@@ -52,7 +52,6 @@ const DoctorDashboard = () => {
       </div>
       <div className="flex flex-row gap-4 w-full">
         <RecentCases />
-        <PopularDoctors />
       </div>
     </div>
   )
