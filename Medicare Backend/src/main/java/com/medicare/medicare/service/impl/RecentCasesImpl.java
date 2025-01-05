@@ -1,5 +1,6 @@
 package com.medicare.medicare.service.impl;
 
+import com.medicare.medicare.dao.AppointmentDAO;
 import com.medicare.medicare.dao.StaffDAO;
 import com.medicare.medicare.dto.doctordashboard.RecentCasesDto;
 import com.medicare.medicare.dto.doctordashboard.dtomappers.RecentCasesMapper;
@@ -9,35 +10,49 @@ import com.medicare.medicare.model.staffentities.Staff;
 import com.medicare.medicare.service.RecentCasesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
 public class RecentCasesImpl implements RecentCasesService {
 
-    public StaffDAO staffDAO;
-    public RecentCasesMapper recentCasesMapper;
+    private final StaffDAO staffDAO;
+    private final RecentCasesMapper recentCasesMapper;
+    private final AppointmentDAO appointmentDAO;
 
     @Autowired
-    public RecentCasesImpl(StaffDAO staffDAO , RecentCasesMapper recentCasesMapper) {
+    public RecentCasesImpl(AppointmentDAO appointmentDAO , StaffDAO staffDAO , RecentCasesMapper recentCasesMapper) {
         this.recentCasesMapper = recentCasesMapper;
         this.staffDAO = staffDAO;
+        this.appointmentDAO = appointmentDAO;
     }
 
     @Override
-    public List<RecentCasesDto> fetchRecentPatients(String userName){
-        Staff doctor = staffDAO.findByStaffUserName(userName);
+    public List<RecentCasesDto> fetchRecentPatients(String userName) {
+        if (userName == null) return new ArrayList<>();
+        if (userName.equalsIgnoreCase("admin@admin.com")) {
 
-        List<Appointment> appointmentsList = doctor.getAppointments();
+            List<Appointment> appointmentsList = appointmentDAO.findAll();
 
-        return appointmentsList.stream()
-                .map(appointment -> {
-                    Patient patient = appointment.getPatient();
-                    return recentCasesMapper.mapEntityToDto(patient, appointment, doctor);
-                })
-                .collect(Collectors.toList());
+            return appointmentsList.stream()
+                    .map(appointment -> {
+                        Patient patient = appointment.getPatient();
+                        return recentCasesMapper.mapEntityToDtoAdmin(patient, appointment);
+                    })
+                    .toList();
+        } else {
+            Staff doctor = staffDAO.findByStaffUserName(userName);
+
+            List<Appointment> appointmentsList = doctor.getAppointments();
+
+            return appointmentsList.stream()
+                    .map(appointment -> {
+                        Patient patient = appointment.getPatient();
+                        return recentCasesMapper.mapEntityToDto(patient, appointment, doctor);
+                    })
+                    .toList();
+        }
     }
 }
 

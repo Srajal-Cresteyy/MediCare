@@ -1,8 +1,9 @@
 package com.medicare.medicare.controller;
 
 import com.medicare.medicare.dto.doctordashboard.RecentCasesDto;
-import com.medicare.medicare.model.patiententities.Patient;
 import com.medicare.medicare.service.RecentCasesService;
+import org.springframework.aop.scope.ScopedProxyUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,11 +15,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/doctor")
-@PreAuthorize("hasRole('ROLE_DOCTOR')")
+@PreAuthorize("hasRole('ROLE_DOCTOR','ROLE_ADMIN')")
 public class DoctorDashboardController {
 
     private final RecentCasesService recentCasesService;
 
+    @Autowired
     public DoctorDashboardController(RecentCasesService recentCasesService) {
         this.recentCasesService = recentCasesService;
     }
@@ -40,7 +42,6 @@ public class DoctorDashboardController {
 
         } catch (Exception e) {
             // Log the exception for debugging
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while fetching recent cases.");
         }
     }

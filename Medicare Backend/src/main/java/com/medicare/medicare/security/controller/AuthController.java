@@ -68,8 +68,7 @@ public class AuthController {
     public ResponseEntity<?> logout(HttpServletRequest request) {
         // Extract the token from the Authorization header
         String authHeader = request.getHeader("Authorization");
-        System.out.println("This is the Logout controller ! ");
-        System.out.println("Authorization Controller Recieved : " + authHeader);
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.badRequest().body("Missing or invalid Authorization header");
         }

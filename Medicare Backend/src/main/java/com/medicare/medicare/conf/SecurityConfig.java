@@ -71,8 +71,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/auth/login").permitAll()
-                                .requestMatchers("/auth/logout").hasAnyRole("DOCTOR","ADMIN","STAFF")
-                                .requestMatchers("/doctor/**").hasRole("DOCTOR")
+                                .requestMatchers("/auth/logout").hasAnyRole("DOCTOR","ADMIN","STAFF","USER")
+                                .requestMatchers("/doctor/**").hasAnyRole("DOCTOR","ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -84,6 +84,8 @@ public class SecurityConfig {
         boolean checkUserExists = userRepository.existsByUserName("admin@admin.com") ;
         boolean checkDoctorSampleExists = userRepository.existsByUserName("doctor@medicare.com");
         boolean checkDoctorExists = userRepository.existsByUserName("arvind.sharma@medicare.com");
+        boolean checkPatientExists = userRepository.existsByUserName("patient@gmail.com");
+
         return args -> {
             if(!checkUserExists) {
                 User admin = new User();
@@ -106,6 +108,15 @@ public class SecurityConfig {
                 doctor.setUserName("arvind.sharma@medicare.com");
                 doctor.setPassword("doctor");
                 doctor.setRole("DOCTOR");
+                userService.saveUser(doctor);
+
+            }
+
+            if(!checkPatientExists){
+                User doctor = new User();
+                doctor.setUserName("patient@gmail.com");
+                doctor.setPassword("12345678");
+                doctor.setRole("USER");
                 userService.saveUser(doctor);
 
             }

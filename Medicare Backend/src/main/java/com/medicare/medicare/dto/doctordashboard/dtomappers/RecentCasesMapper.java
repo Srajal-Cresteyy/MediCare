@@ -22,4 +22,21 @@ public class RecentCasesMapper {
         recentCasesDto.setAppointmentStatus(appointment.getAppointmentStatus());
         return recentCasesDto;
     }
+
+    // To get All the Recent Cases for Admin
+    public RecentCasesDto mapEntityToDtoAdmin(Patient patient, Appointment appointment){
+        Staff doctor = appointment.getDoctor();
+        RecentCasesDto recentCasesDto = new RecentCasesDto();
+        recentCasesDto.setPatientID(patient.getPatientID());
+        recentCasesDto.setFirstName(patient.getFirstName());
+        recentCasesDto.setLastName(patient.getLastName());
+        recentCasesDto.setStaffID(doctor.getStaffID());
+        recentCasesDto.setDateOfAppointment(appointment.getAppointmentDate());
+        recentCasesDto.setGender(patient.getGender());
+        recentCasesDto.setAddress(patient.getAddress());
+        recentCasesDto.setPhoneNumber(patient.getPhoneNumber());
+        recentCasesDto.setEmergencyContact(patient.getEmergencyContact());
+        recentCasesDto.setAppointmentStatus(appointment.getAppointmentStatus());
+        return recentCasesDto;
+    }
 }
