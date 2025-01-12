@@ -1,4 +1,4 @@
-package com.medicare.medicare.dto.doctordashboard;
+package com.medicare.medicare.dto.dtoclasses.backenddtos.doctordto;
 
 import com.medicare.medicare.utility.enums.Gender;
 import com.medicare.medicare.utility.enums.Status;

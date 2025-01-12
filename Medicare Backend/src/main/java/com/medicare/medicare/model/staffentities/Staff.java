@@ -6,6 +6,8 @@ import com.medicare.medicare.model.facilityentities.DepartmentFacilityMapping;
 import com.medicare.medicare.utility.enums.Position;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,7 +33,8 @@ public class Staff {
     private Position position;
 
     @JoinColumn(name = "Department_Staff")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @ToString.Exclude
     private DepartmentFacilityMapping staffDepartment;
 
     @Column(name = "Hire_Date")
@@ -41,8 +44,10 @@ public class Staff {
     private Long contactNumber;
 
     @OneToMany
+    @ToString.Exclude
     private List<Vaccination> vaccinationsAdministered;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "doctor")
+    @ToString.Exclude
     private List<Appointment> appointments;
 }

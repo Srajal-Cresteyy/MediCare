@@ -23,6 +23,6 @@ public class Departments {
     @Column(name = "Department_Description")
     private String departmentDescription;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "department")
     private List<DepartmentFacilityMapping> departmentFacilityMappings;
 }

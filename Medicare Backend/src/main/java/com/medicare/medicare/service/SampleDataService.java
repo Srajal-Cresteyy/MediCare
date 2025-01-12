@@ -72,7 +72,7 @@ public class SampleDataService {
         patient.setGender(Gender.MALE);
         patient.setAddress("Pune, Maharashtra");
         patient.setPhoneNumber(9876543210L);
-        patient.setEmail("srajaldwivedi@email.com");
+        patient.setEmail("srajaldwivedi@gmail.com");
         patient.setEmergencyContact(1234567890L);
         patientDAO.save(patient);
 
@@ -102,13 +102,15 @@ public class SampleDataService {
         departmentFacilityMapping.setDepartment(department);
         departmentFacilityMapping.setFacility(facility);
         List<Staff> departmentStaffs = new ArrayList<>();
-        departmentStaffs.add(doctor);
         departmentFacilityMapping.setDepartmentStaffs(departmentStaffs);
         departmentFacilityMappingDao.save(departmentFacilityMapping);
         // Assigning Facility / Department to the Doctor
 
         doctor.setStaffDepartment(departmentFacilityMapping);
+
         staffDAO.save(doctor);
+        departmentStaffs.add(doctor);
+        departmentFacilityMappingDao.save(departmentFacilityMapping);
 
         System.out.println("Successfully Inserted the Sample Data !");
     }

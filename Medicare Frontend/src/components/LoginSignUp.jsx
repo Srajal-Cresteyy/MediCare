@@ -80,7 +80,7 @@ const LoginSignup = () => {
         }}
       >
         <Typography variant="h4" sx={{ marginBottom: 2, color: '#2196F3' }}>
-          {tab === 'login' ? 'Login' : 'SIGN UP'}
+          {tab === 'login' ? 'Login' : 'Sign-UP'}
         </Typography>
         <Tabs
           value={tab}

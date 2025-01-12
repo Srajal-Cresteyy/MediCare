@@ -7,6 +7,8 @@ import com.medicare.medicare.utility.enums.Gender;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -39,22 +41,26 @@ public class Patient {
     @Column(name = "Phone_Number")
     private Long phoneNumber;
 
-    @Column(name = "Email")
+    @Column(name = "Email",unique = true)
     private String email;
 
     @Column(name = "Emergency_Contact")
     private Long emergencyContact;
 
     @OneToMany(cascade = CascadeType.PERSIST)
+    @ToString.Exclude
     private List<PatientHistory> patientHistories;
 
     @OneToMany
+    @ToString.Exclude
     private List<Vaccination> vaccinationsTaken;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "patient")
+    @ToString.Exclude
     private List<Appointment> appointments;
 
     @OneToMany
+    @ToString.Exclude
     private List<LabTest> labTests;
 }
 

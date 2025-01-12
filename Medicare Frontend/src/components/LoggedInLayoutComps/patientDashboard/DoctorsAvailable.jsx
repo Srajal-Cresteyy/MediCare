@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { API_BACKEND_URL } from '../../../apiConfig'
 
 const DoctorsAvailable = () => {
   const [doctors, setDoctors] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -19,7 +20,7 @@ const DoctorsAvailable = () => {
         }
 
         const response = await axios.get(
-          `${API_BACKEND_URL}/doctorsAvailable`,
+          `${API_BACKEND_URL}/medicareApi/doctorInfo`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -39,6 +40,22 @@ const DoctorsAvailable = () => {
 
     fetchDoctors()
   }, [])
+
+  const handleAction = (action, doctorId) => {
+    switch (action) {
+      case 'book':
+        navigate(`/auth/book-appointment/${doctorId}`) // Correct path
+        break
+      case 'feedback':
+        navigate(`/auth/give-feedback/${doctorId}`)
+        break
+      case 'testimonials':
+        navigate(`/auth/doctor-testimonials/${doctorId}`)
+        break
+      default:
+        break
+    }
+  }
 
   if (loading) {
     return (
@@ -83,13 +100,14 @@ const DoctorsAvailable = () => {
           <thead>
             <tr className="bg-gray-100 border-b border-gray-200">
               <th className="px-4 py-2 text-gray-700 font-medium">Doctor ID</th>
-              <th className="px-4 py-2 text-gray-700 font-medium">Username</th>
               <th className="px-4 py-2 text-gray-700 font-medium">Name</th>
+              <th className="px-4 py-2 text-gray-700 font-medium">UserName</th>
               <th className="px-4 py-2 text-gray-700 font-medium">Position</th>
               <th className="px-4 py-2 text-gray-700 font-medium">
                 Department
               </th>
               <th className="px-4 py-2 text-gray-700 font-medium">Contact</th>
+              <th className="px-4 py-2 text-gray-700 font-medium">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -102,16 +120,32 @@ const DoctorsAvailable = () => {
               >
                 <td className="px-4 py-2">{doctor.staffID}</td>
                 <td className="px-4 py-2">
+                  {doctor.firstName} {doctor.lastName}
+                </td>
+                <td className="px-4 py-2">
                   <Link to={`doctors/${doctor.staffID}`}>
                     {doctor.staffUserName}
                   </Link>
                 </td>
-                <td className="px-4 py-2">
-                  {doctor.firstName} {doctor.lastName}
-                </td>
                 <td className="px-4 py-2">{doctor.position}</td>
                 <td className="px-4 py-2">{doctor.staffDepartment}</td>
                 <td className="px-4 py-2">{doctor.contactNumber}</td>
+                <td className="px-4 py-2">
+                  <select
+                    className="border border-gray-300 rounded px-2 py-1"
+                    defaultValue=""
+                    onChange={(e) =>
+                      handleAction(e.target.value, doctor.staffID)
+                    }
+                  >
+                    <option value="" disabled>
+                      Action
+                    </option>
+                    <option value="book">Book Appointment</option>
+                    <option value="feedback">Give Feedback</option>
+                    <option value="testimonials">Doctor Testimonials</option>
+                  </select>
+                </td>
               </tr>
             ))}
           </tbody>

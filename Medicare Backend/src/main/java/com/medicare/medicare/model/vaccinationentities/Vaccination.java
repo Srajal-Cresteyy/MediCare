@@ -18,7 +18,7 @@ public class Vaccination {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int vaccinationID;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "vaccinationsTaken")
     private List<Patient> patientsGiven;
 
     @Column(name = "Vaccination_Name")

@@ -73,6 +73,7 @@ public class SecurityConfig {
                                 .requestMatchers("/auth/login").permitAll()
                                 .requestMatchers("/auth/logout").hasAnyRole("DOCTOR","ADMIN","STAFF","USER")
                                 .requestMatchers("/doctor/**").hasAnyRole("DOCTOR","ADMIN")
+                                .requestMatchers("/patientsApi/**").hasAnyRole("USER")
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -85,6 +86,7 @@ public class SecurityConfig {
         boolean checkDoctorSampleExists = userRepository.existsByUserName("doctor@medicare.com");
         boolean checkDoctorExists = userRepository.existsByUserName("arvind.sharma@medicare.com");
         boolean checkPatientExists = userRepository.existsByUserName("patient@gmail.com");
+        boolean checkPatient2Exists = userRepository.existsByUserName("srajaldwivedi@gmail.com");
 
         return args -> {
             if(!checkUserExists) {
@@ -103,6 +105,7 @@ public class SecurityConfig {
                 userService.saveUser(doctorSample);
             }
 
+
             if(!checkDoctorExists){
                 User doctor = new User();
                 doctor.setUserName("arvind.sharma@medicare.com");
@@ -112,13 +115,22 @@ public class SecurityConfig {
 
             }
 
+            // USER Role is for Patients
+
             if(!checkPatientExists){
                 User doctor = new User();
                 doctor.setUserName("patient@gmail.com");
                 doctor.setPassword("12345678");
                 doctor.setRole("USER");
                 userService.saveUser(doctor);
+            }
 
+            if(!checkPatient2Exists){
+                User doctor = new User();
+                doctor.setUserName("srajaldwivedi@gmail.com");
+                doctor.setPassword("12345678");
+                doctor.setRole("USER");
+                userService.saveUser(doctor);
             }
         };
     }

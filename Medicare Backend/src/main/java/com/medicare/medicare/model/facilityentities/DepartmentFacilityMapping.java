@@ -23,9 +23,9 @@ public class DepartmentFacilityMapping {
     @ManyToOne
     private Facilities facility;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "staffDepartment")
     private List<Staff> departmentStaffs;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "departmentFacilityMapping")
     private List<Expenses> expenses;
 }

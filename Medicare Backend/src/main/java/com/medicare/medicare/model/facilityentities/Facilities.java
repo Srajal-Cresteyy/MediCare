@@ -26,6 +26,6 @@ public class Facilities {
     @Column(name = "Email")
     private String facilityEmail;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "facility")
     List<DepartmentFacilityMapping> departments;
 }

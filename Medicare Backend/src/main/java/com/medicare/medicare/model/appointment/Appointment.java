@@ -6,6 +6,7 @@ import com.medicare.medicare.model.staffentities.Staff;
 import com.medicare.medicare.utility.enums.Status;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -17,10 +18,12 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int appointmentID;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @ToString.Exclude
     private Patient patient;
 
     @ManyToOne
+    @ToString.Exclude
     private Staff doctor;
 
     @Column(name = "Appointment_Date")

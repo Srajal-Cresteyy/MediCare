@@ -15,6 +15,9 @@ import LoggedInLayouts from './layouts/LoggedInLayouts'
 import DoctorDashboard from './components/DoctorDashboard'
 import TestComponentDashboard from './components/TestComponentDashboard'
 import PatientDashboard from './components/PatientDashboard'
+import BookAppointments from './components/LoggedInLayoutComps/patientComps/BookAppointments'
+import PatientAppointments from './components/LoggedInLayoutComps/patientDashboard/PatientAppointments'
+import DoctorsAvailable from './components/LoggedInLayoutComps/patientDashboard/DoctorsAvailable'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,6 +50,30 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute roleRequired={'USER'}>
               <PatientDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="book-appointment/:doctorId"
+          element={
+            <ProtectedRoute>
+              <BookAppointments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="yourAppointments"
+          element={
+            <ProtectedRoute>
+              <PatientAppointments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="allDoctors"
+          element={
+            <ProtectedRoute>
+              <DoctorsAvailable />
             </ProtectedRoute>
           }
         />
