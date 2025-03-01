@@ -34,7 +34,8 @@ public class AppointmentRequestMappers {
 
         Staff doctor = doctorDao.findById(appointmentRequest.getDoctorId()).get();
         Patient patient = patientDAO.findByEmail(patientEmail);
-
+        System.out.println("Patient for Which Appointment is Booked " + patient);
+        System.out.println("Patient Email is  : "  + patientEmail);
         Appointment appointment = new Appointment();
         appointment.setPatient(patient);
         appointment.setDoctor(doctor);

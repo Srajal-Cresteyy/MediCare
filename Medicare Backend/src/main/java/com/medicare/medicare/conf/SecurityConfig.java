@@ -85,7 +85,6 @@ public class SecurityConfig {
         boolean checkUserExists = userRepository.existsByUserName("admin@admin.com") ;
         boolean checkDoctorSampleExists = userRepository.existsByUserName("doctor@medicare.com");
         boolean checkDoctorExists = userRepository.existsByUserName("arvind.sharma@medicare.com");
-        boolean checkPatientExists = userRepository.existsByUserName("patient@gmail.com");
         boolean checkPatient2Exists = userRepository.existsByUserName("srajaldwivedi@gmail.com");
 
         return args -> {
@@ -116,14 +115,6 @@ public class SecurityConfig {
             }
 
             // USER Role is for Patients
-
-            if(!checkPatientExists){
-                User doctor = new User();
-                doctor.setUserName("patient@gmail.com");
-                doctor.setPassword("12345678");
-                doctor.setRole("USER");
-                userService.saveUser(doctor);
-            }
 
             if(!checkPatient2Exists){
                 User doctor = new User();

@@ -33,6 +33,7 @@ public class RecentCasesImpl implements RecentCasesService {
     @Override
     public List<RecentCasesDto> fetchRecentPatients(String userName) {
         if (userName == null) return new ArrayList<>();
+
         if (userName.equalsIgnoreCase("admin@admin.com")) {
 
             List<Appointment> appointmentsList = appointmentDAO.findAll();
@@ -47,12 +48,7 @@ public class RecentCasesImpl implements RecentCasesService {
 
             List<Appointment> appointmentsList = doctor.getAppointments();
 
-            return appointmentsList.stream()
-                    .map(appointment -> {
-                        Patient patient = appointment.getPatient();
-                        return recentCasesMapper.mapEntityToDto(patient, appointment, doctor);
-                    })
-                    .toList();
+            return  recentCasesMapper.mapEntityToDtoList(doctor,appointmentsList);
         }
     }
 }

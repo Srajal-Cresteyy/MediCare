@@ -4,15 +4,16 @@ import com.medicare.medicare.dto.dtoclasses.backenddtos.doctordto.RecentCasesDto
 import com.medicare.medicare.model.appointment.Appointment;
 import com.medicare.medicare.model.patiententities.Patient;
 import com.medicare.medicare.model.staffentities.Staff;
-import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class RecentCasesMapper {
-    public RecentCasesDto mapEntityToDto(Patient patient, Appointment appointment , Staff doctor){
+    public RecentCasesDto mapEntityToDto(Appointment appointment , Staff doctor){
 
-        if(patient == null || appointment == null || doctor == null) throw new NullPointerException("One of the Arguments is null");
-
+        if(appointment == null || doctor == null) throw new NullPointerException("One of the Arguments is null");
+        Patient patient = appointment.getPatient();
         RecentCasesDto recentCasesDto = new RecentCasesDto();
         recentCasesDto.setPatientID(patient.getPatientID());
         recentCasesDto.setFirstName(patient.getFirstName());
@@ -25,6 +26,14 @@ public class RecentCasesMapper {
         recentCasesDto.setEmergencyContact(patient.getEmergencyContact());
         recentCasesDto.setAppointmentStatus(appointment.getAppointmentStatus());
         return recentCasesDto;
+    }
+
+    public List<RecentCasesDto> mapEntityToDtoList(Staff doctor , List<Appointment> appointments){
+        return  appointments.stream()
+                .map(appointment -> {
+                   return mapEntityToDto(appointment, doctor);
+                })
+                .toList();
     }
 
     // To get All the Recent Cases for Admin

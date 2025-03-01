@@ -29,6 +29,8 @@ public class DoctorDashboardController {
         // Get the logged-in doctor's username
         String loggedInDoctorUsername = SecurityContextHolder.getContext().getAuthentication().getName();
 
+        System.out.println("Going to bring in the Recent Cases !");
+
         // Retrieve recent appointments
         List<RecentCasesDto> patients = recentCasesService.fetchRecentPatients(loggedInDoctorUsername);
 
