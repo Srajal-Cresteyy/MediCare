@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Calendar from 'react-calendar'
+// import 'react-calendar/dist/Calendar.css'
+import Modal from '@mui/material/Modal'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import { API_BACKEND_URL } from '../../../apiConfig'
+import './patientDashboardStyles/calendarStyles.css' // Custom styles for better UI
 
 const PatientAppointments = () => {
   const [appointments, setAppointments] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const token = localStorage.getItem('token') // JWT from localStorage
+        const token = localStorage.getItem('token')
         if (!token) {
           setError('No token found. Please log in again.')
           setLoading(false)
           return
         }
 
-        const response = await axios.get(
-          `/patientsApi/myAppointments`, // Endpoint for fetching appointment data
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        const response = await axios.get(`/patientsApi/myAppointments`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
 
-        setAppointments(response.data) // Assuming response is a list of AppointmentRequest objects
+        setAppointments(response.data)
       } catch (err) {
         setError(
           err.response?.data?.error || err.message || 'Failed to fetch data.'
@@ -39,80 +42,93 @@ const PatientAppointments = () => {
     fetchAppointments()
   }, [])
 
-  if (loading) {
-    return (
-      <div className="bg-white px-6 py-6 rounded-lg shadow-md border border-gray-300 flex-1">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          Appointment Details
-        </h2>
-        <p>Loading...</p>
-      </div>
-    )
+  const handleDateClick = (date) => {
+    setSelectedDate(date)
+    setOpen(true)
   }
 
-  if (error) {
-    return (
-      <div className="bg-white px-6 py-6 rounded-lg shadow-md border border-gray-300 flex-1">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          Appointment Details
-        </h2>
-        <p className="text-red-600">{error}</p>
-      </div>
+  const handleClose = () => setOpen(false)
+
+  const formattedAppointments = appointments.map((appointment) => {
+    const [year, month, day] = appointment.appointmentDate
+    return { ...appointment, date: new Date(year, month - 1, day) }
+  })
+
+  const tileClassName = ({ date }) => {
+    return formattedAppointments.some(
+      (appt) => appt.date.toDateString() === date.toDateString()
     )
+      ? 'highlighted-date'
+      : 'un-highlighted-date'
   }
 
-  if (appointments.length === 0) {
-    return (
-      <div className="bg-white px-6 py-6 rounded-lg shadow-md border border-gray-300 flex-1">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          Appointment Details
-        </h2>
-        <p>No appointments found.</p>
-      </div>
-    )
-  }
+  const selectedAppointments = formattedAppointments.filter(
+    (appt) => appt.date.toDateString() === selectedDate?.toDateString()
+  )
 
-  console.log('Appointments : ', appointments)
+  if (loading) return <p>Loading...</p>
+  if (error) return <p className="text-red-600">{error}</p>
+
   return (
-    <div className="bg-white px-6 pt-4 pb-6 rounded-lg shadow-md border border-gray-300 flex-1">
+    <div className="bg-white p-6 rounded-lg shadow-md border border-gray-300 flex-1">
       <h2 className="text-lg font-semibold text-gray-800 mb-4">
-        Appointment Details
+        Your Appointments
       </h2>
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse min-w-[800px]">
-          <thead>
-            <tr className="bg-gray-100 border-b border-gray-200">
-              <th className="px-4 py-2 text-gray-700 font-medium">Doctor ID</th>
-              <th className="px-4 py-2 text-gray-700 font-medium">
-                Appointment Date
-              </th>
-              <th className="px-4 py-2 text-gray-700 font-medium">
-                Appointment Time
-              </th>
-              <th className="px-4 py-2 text-gray-700 font-medium">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {appointments.map((appointment, index) => (
-              <tr
-                key={appointment.appointmentId}
-                className={`border-b ${
-                  index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
-                } hover:bg-gray-100 transition`}
-              >
-                <td className="px-4 py-2">{appointment.doctorId}</td>
-                <td className="px-4 py-2">
-                  {appointment.appointmentDate[0]} -
-                  {appointment.appointmentDate[1]} -
-                  {appointment.appointmentDate[2]}
-                </td>
-                <td className="px-4 py-2">{appointment.appointmentTime}</td>
-                <td className="px-4 py-2">{appointment.appointmentNotes}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Calendar
+        onClickDay={handleDateClick}
+        tileClassName={tileClassName}
+        className="custom-calendar"
+      />
+
+      <Modal open={open} onClose={handleClose}>
+        <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-xl shadow-2xl w-96 border border-gray-200">
+          {/* Close button */}
+          <button
+            onClick={handleClose}
+            className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 transition duration-300"
+          >
+            ✖
+          </button>
+
+          {/* Modal Title */}
+          <Typography
+            variant="h6"
+            component="h2"
+            className="text-lg font-semibold text-gray-800 mb-4"
+          >
+            📅{selectedDate?.toDateString()}
+          </Typography>
+
+          {/* Appointment List */}
+          {selectedAppointments.length > 0 ? (
+            <ul className="space-y-3">
+              {selectedAppointments.map((appt) => (
+                <li
+                  key={appt.appointmentId}
+                  className="border p-3 rounded-lg shadow-sm bg-gray-50 hover:bg-gray-100 transition duration-300"
+                >
+                  <p className="text-gray-700">
+                    <strong className="text-blue-600">Doctor ID:</strong>{' '}
+                    {appt.doctorId}
+                  </p>
+                  <p className="text-gray-700">
+                    <strong className="text-green-600">Time:</strong>{' '}
+                    {appt.appointmentTime}
+                  </p>
+                  <p className="text-gray-700">
+                    <strong className="text-red-500">Notes:</strong>{' '}
+                    {appt.appointmentNotes || 'N/A'}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-center text-gray-500 mt-3">
+              No appointments on this day.
+            </p>
+          )}
+        </Box>
+      </Modal>
     </div>
   )
 }

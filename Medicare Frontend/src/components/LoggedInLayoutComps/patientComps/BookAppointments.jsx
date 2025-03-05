@@ -42,7 +42,7 @@ const BookAppointments = () => {
 
       if (response.status === 200) {
         setMessage('Appointment booked successfully!')
-        navigate('/auth/patientDashboard') // Redirect to the patient dashboard
+        navigate('/auth/yourAppointments') // Redirect to the patient dashboard
       }
     } catch (error) {
       setMessage('Failed to book appointment. Please try again.')

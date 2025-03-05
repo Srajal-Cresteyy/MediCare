@@ -22,11 +22,14 @@ import DoctorsAvailable from './components/LoggedInLayoutComps/patientDashboard/
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      {/* Unprotected Route of Landing Page and Login-SignUp Page  */}
       <Route path="/" element={<MainLayout />}>
         <Route index element={<LandingPage />} />
         <Route path="/LoginSignUp" element={<LoginSignUpPage />} />
       </Route>
       <Route path="/content" element={<TestComponent />} />
+
+      {/* Protected Route for Various login dashboard etc */}
       <Route path="/auth" element={<LoggedInLayouts />}>
         <Route
           index
@@ -56,7 +59,7 @@ const router = createBrowserRouter(
         <Route
           path="book-appointment/:doctorId"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute roleRequired={'USER'}>
               <BookAppointments />
             </ProtectedRoute>
           }
@@ -64,7 +67,7 @@ const router = createBrowserRouter(
         <Route
           path="yourAppointments"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute roleRequired={'USER'}>
               <PatientAppointments />
             </ProtectedRoute>
           }
@@ -78,7 +81,6 @@ const router = createBrowserRouter(
           }
         />
       </Route>
-      {/* Sample Commit Changes*/}
       <Route
         path="doctorDashboardTest"
         element={
