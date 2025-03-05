@@ -83,7 +83,6 @@ public class SecurityConfig {
     @Bean
     public CommandLineRunner initData( UserRepository userRepository) {
         boolean checkUserExists = userRepository.existsByUserName("admin@admin.com") ;
-        boolean checkDoctorSampleExists = userRepository.existsByUserName("doctor@medicare.com");
         boolean checkDoctorExists = userRepository.existsByUserName("arvind.sharma@medicare.com");
         boolean checkPatient2Exists = userRepository.existsByUserName("srajaldwivedi@gmail.com");
 
@@ -94,14 +93,6 @@ public class SecurityConfig {
                 admin.setPassword("admin");
                 admin.setRole("ADMIN");
                 userService.saveUser(admin);
-            }
-
-            if(!checkDoctorSampleExists) {
-                User doctorSample = new User();
-                doctorSample.setUserName("doctor@medicare.com");
-                doctorSample.setPassword("doctor");
-                doctorSample.setRole("DOCTOR");
-                userService.saveUser(doctorSample);
             }
 
 
