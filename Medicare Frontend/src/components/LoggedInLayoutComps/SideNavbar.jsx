@@ -19,7 +19,6 @@ const typoStyles = {
 }
 
 const role = localStorage.getItem('role')
-console.log('Role : ' + role)
 
 const linkClass =
   'flex items-center gap-2 font-light px-3 py-2 rounded-lg text-base transition-colors duration-300 hover:bg-gradient-to-r hover:from-[#2196F3] hover:via-[#2196F3] hover:to-[#2196F3] hover:text-white active:bg-[#2196F3]'

@@ -130,7 +130,7 @@ const LoginSignup = () => {
               }}
             >
               <option value="ADMIN">Admin</option>
-              <option value="USER">User</option>
+              <option value="USER">Patient</option>
               <option value="DOCTOR">Doctor</option>
               <option value="STAFF">Staff</option>
             </TextField>

@@ -1,2 +1,1 @@
-// src/apiConfig.js
-export const API_BACKEND_URL = 'http://localhost:8088' // Only need to change this in one place
+export const API_BACKEND_URL = import.meta.env.VITE_SERVER_URL
