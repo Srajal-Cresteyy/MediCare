@@ -29,6 +29,7 @@ const BookAppointments = () => {
         appointmentTime,
         appointmentNotes,
       }
+      console.log(appointmentDetails)
 
       const response = await axios.post(
         `${API_BACKEND_URL}/patientsApi/bookAppointment`,
