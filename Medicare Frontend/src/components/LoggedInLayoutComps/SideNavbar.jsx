@@ -25,15 +25,18 @@ const linkClass =
 
 const SideNavbar = () => {
   const [sideNavbarLinks, setSideNavLinks] = useState([])
+  const [role, setRole] = useState(localStorage.getItem('role')) // Track role changes
 
   useEffect(() => {
+    setRole(localStorage.getItem('role')) // Ensure role updates dynamically
+
     if (role === 'ROLE_USER') setSideNavLinks(DASHBOARD_SIDEBAR_LINKS_PATIENT)
     else if (role === 'ROLE_DOCTOR')
       setSideNavLinks(DASHBOARD_SIDEBAR_LINKS_DOCTOR)
     else if (role === 'ROLE_ADMIN')
       setSideNavLinks(DASHBOARD_SIDEBAR_LINKS_ADMIN)
     else setSideNavLinks(DASHBOARD_SIDEBAR_LINKS)
-  }, [role])
+  }, [role]) // Dependency on role ensures it updates dynamically
 
   const handleLogOut = useLogout()
 
