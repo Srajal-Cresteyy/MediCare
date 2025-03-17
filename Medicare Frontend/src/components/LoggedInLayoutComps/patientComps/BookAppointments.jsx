@@ -29,7 +29,6 @@ const BookAppointments = () => {
         appointmentTime,
         appointmentNotes,
       }
-      console.log(appointmentDetails)
 
       const response = await axios.post(
         `${API_BACKEND_URL}/patientsApi/bookAppointment`,
@@ -44,7 +43,7 @@ const BookAppointments = () => {
 
       if (response.status === 200) {
         setMessage('Appointment booked successfully!')
-        navigate(`${API_BACKEND_URL}/auth/yourAppointments`) // Redirect to the patient dashboard
+        navigate(`/auth/yourAppointments`) // Redirect to the patient dashboard
       }
     } catch (error) {
       setMessage('Failed to book appointment. Please try again.')
