@@ -3,6 +3,7 @@ import { Box, Button, TextField, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios' // For API calls
+import { API_BACKEND_URL } from '../../../apiConfig'
 
 const BookAppointments = () => {
   const { doctorId } = useParams() // Extract doctorId from the route
@@ -30,7 +31,7 @@ const BookAppointments = () => {
       }
 
       const response = await axios.post(
-        '/patientsApi/bookAppointment',
+        `${API_BACKEND_URL}/patientsApi/bookAppointment`,
         appointmentDetails,
         {
           headers: {
@@ -42,7 +43,7 @@ const BookAppointments = () => {
 
       if (response.status === 200) {
         setMessage('Appointment booked successfully!')
-        navigate('/auth/yourAppointments') // Redirect to the patient dashboard
+        navigate(`${API_BACKEND_URL}/auth/yourAppointments`) // Redirect to the patient dashboard
       }
     } catch (error) {
       setMessage('Failed to book appointment. Please try again.')
