@@ -1,5 +1,6 @@
 package com.medicare.medicare.conf;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -14,14 +15,16 @@ import java.util.Arrays;
 @Configuration
 @EnableWebMvc
 public class WebConfig {
-    
+
+    @Value("${allowed.url}")
+    private String allowedURL;
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:5173/");
+        config.addAllowedOrigin(allowedURL);
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,
                 HttpHeaders.CONTENT_TYPE,

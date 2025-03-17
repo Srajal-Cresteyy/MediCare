@@ -11,7 +11,7 @@
 	<groupId>com.medicare</groupId>
 	<artifactId>medicare</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>medicare</name>
 	<description>Project for MediCare Hospital Management System</description>
 	<url/>
