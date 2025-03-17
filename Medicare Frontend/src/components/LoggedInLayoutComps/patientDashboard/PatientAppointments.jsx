@@ -25,9 +25,12 @@ const PatientAppointments = () => {
           return
         }
 
-        const response = await axios.get(`/patientsApi/myAppointments`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
+        const response = await axios.get(
+          `${API_BACKEND_URL}/patientsApi/myAppointments`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
 
         setAppointments(response.data)
       } catch (err) {
